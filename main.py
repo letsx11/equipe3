@@ -22,9 +22,9 @@ fonte_botao = pg.font.Font(None, 60)
 
 # Fundo da tela inicial 
 escala = 5 # Escala para pixelar as imagens (quanto maior, mais pixelado)
-fundo_tela_incial = pg.image.load("olinda-carnaval.webp")
-fundo_tela_incial = pg.transform.scale(fundo_tela_incial, (LARGURA, ALTURA))
-fundo_reduzido_inicial = pg.transform.scale(fundo_tela_incial, (LARGURA // escala, ALTURA // escala ))
+fundo_tela_inicial = pg.image.load("olinda-carnaval.webp")
+fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
+fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // escala, ALTURA // escala ))
 fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
@@ -34,13 +34,16 @@ fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, AL
 fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
 
 # Botões
-texto_botao = fonte_botao.render("Clique aqui para iniciar", True, BRANCO)
+texto_botao = fonte_botao.render("Iniciar Jogo", True, BRANCO)
 texto_botao_sair = fonte_botao.render("Sair", True, BRANCO)
+texto_botao_reiniciar = fonte_botao.render("Jogar Novamente", True, BRANCO)
 
 botao_rect = pg.Rect(0, 0, texto_botao.get_width() + 40, texto_botao.get_height() + 20)
 botao_rect.center = (LARGURA // 2, ALTURA // 2 - 20)
 botao_sair_rect = pg.Rect(0, 0, texto_botao_sair.get_width() + 40, texto_botao_sair.get_height() + 20)
 botao_sair_rect.center = (LARGURA // 2, ALTURA // 2 + 120)
+botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, texto_botao_reiniciar.get_height() + 20)
+botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
 
 # Música 
 pg.mixer.music.load("marcelorossiter-voltei-recife-8e035859.mp3")
@@ -90,14 +93,18 @@ def tela_inicial():
         cor_botao_sair = VERMELHO if botao_sair_rect.collidepoint(mouse_pos) else VERMELHO_ESCURO
 
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
+            if evento.type == pg.KEYDOWN: # Sair se apertar em ESC
+                if evento.key == pg.K_ESCAPE:   
+                    pg.quit()
+                    sys.exit()
+            if evento.type == pg.QUIT: # Sair se fechar o pygame 
                 pg.quit()
                 sys.exit()
             if evento.type == pg.MOUSEBUTTONDOWN:
                 if botao_rect.collidepoint(evento.pos):
                     pg.mixer.music.stop()
                     return  
-                if botao_sair_rect.collidepoint(evento.pos):
+                if botao_sair_rect.collidepoint(evento.pos): # Sair se clicar em sair 
                     pg.quit()
                     sys.exit()
             
@@ -118,22 +125,40 @@ def tela_inicial():
 
 # Função principal do jogo
 def jogo():
+    global vencedor
+    global total_coletaveis  
+
     relogio = pg.time.Clock()
+    tempo_restante = 60000  # 1 minuto 
+    tempo_inicial = pg.time.get_ticks()
+    fonte_tempo = pg.font.Font(None, 50)
+
     FPS = 60
-    jogador = Player(LARGURA//2, ALTURA-100, 2, 5)
+    jogador = Player(LARGURA // 2, ALTURA - 100, 2, 5)
     esquerda = direita = False
-    
-    rodando = True
+
+    total_coletaveis = 0  
+
+    vencedor = False  
+    rodando = True  
     while rodando:
         relogio.tick(FPS)
-        
+
+        # Tempo  
+        tempo_atual = pg.time.get_ticks()
+        tempo_decorrido = tempo_atual - tempo_inicial
+        tempo_restante -= tempo_decorrido  
+        tempo_inicial = tempo_atual  
+
         for evento in pg.event.get():
-            if evento.type == pg.QUIT:
-                rodando = False
+            if evento.type == pg.QUIT:  
+                pg.quit()
+                sys.exit()
             if evento.type == pg.KEYDOWN:
-                if evento.key == pg.K_ESCAPE:
-                    return  
-                if evento.key == pg.K_a:
+                if evento.key == pg.K_ESCAPE:  
+                    pg.quit()
+                    sys.exit()
+                if evento.key == pg.K_a: 
                     esquerda = True
                 if evento.key == pg.K_d:
                     direita = True
@@ -143,15 +168,96 @@ def jogo():
                 if evento.key == pg.K_d:
                     direita = False
         
+        # Verifica se o tempo acabou
+        if tempo_restante <= 0:  
+            vencedor = True 
+            rodando = False  # Sai do loop
+
+        # Aqui adiciona condição para verificar se as vidas acabaram
+
+        # Atualizar tela do jogo
         tela.blit(fundo_tela_jogo, (0, 0))
         jogador.move(esquerda, direita, LARGURA)
         jogador.draw()
+
+        pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 50), 0, 100, 35), border_radius=3)  
+        tempo_segundos = max (0,tempo_restante // 1000)
+        texto_tempo = fonte_tempo.render(f"00:{tempo_segundos}", True, BRANCO)  
+        rect_tempo = texto_tempo.get_rect(center=(LARGURA // 2,  19))
+        tela.blit(texto_tempo, rect_tempo.topleft)
+
         pg.display.update()
     
-    pg.quit()
-    sys.exit()
+    tela_final(vencedor, total_coletaveis)
+    return vencedor, total_coletaveis   
+
+# Tela final
+def tela_final(vencedor, total_coletaveis):
+    rodando = True
+    fonte_mensagem = pg.font.Font(None, 40)  
+    largura_mensagem = 500  
+    altura_mensagem = 70
+
+    while rodando:
+        mouse_pos = pg.mouse.get_pos()
+        for evento in pg.event.get():
+            if evento.type == pg.QUIT:  
+                pg.quit()
+                sys.exit()
+            if evento.type == pg.KEYDOWN and evento.key == pg.K_ESCAPE: 
+                pg.quit()
+                sys.exit() 
+                
+        tela.blit(fundo_tela_incial, (0, 0))
+
+        # Definir mensagem conforme resultado
+        if vencedor:
+            mensagem = f"Parabéns! Você coletou {total_coletaveis} itens!"      
+        else:
+            mensagem = "Infelizmente suas vidas acabaram antes do tempo."
+
+        retangulo_mensagem = pg.Rect(0, 0, largura_mensagem, altura_mensagem)
+        retangulo_mensagem.center = (LARGURA // 2, ALTURA // 2)
+        pg.draw.rect(tela, CINZA_ESCURO, retangulo_mensagem, border_radius=15)  
+        pg.draw.rect(tela, BRANCO, retangulo_mensagem.inflate(-10, -10), border_radius=15)  
+       
+        texto_mensagem = fonte_mensagem.render(mensagem, True, CINZA_ESCURO)
+        rect_mensagem = texto_mensagem.get_rect(center=(LARGURA // 2, ALTURA//2))
+        tela.blit(texto_mensagem, rect_mensagem)
+
+
+        cor_botao_reiniciar = VERDE if botao_reiniciar_rect.collidepoint(mouse_pos) else VERDE_ESCURO
+        cor_botao_sair = VERMELHO if botao_sair_rect.collidepoint(mouse_pos) else VERMELHO_ESCURO
+
+        for evento in pg.event.get():
+            if evento.type == pg.KEYDOWN: # Sair se apertar em ESC
+                if evento.key == pg.K_ESCAPE:   
+                    pg.quit()
+                    sys.exit()
+            if evento.type == pg.QUIT: # Sair se fechar o pygame 
+                pg.quit()
+                sys.exit()
+            if evento.type == pg.MOUSEBUTTONDOWN:
+                if botao_reiniciar_rect.collidepoint(evento.pos):
+                    jogo()
+                if botao_sair_rect.collidepoint(evento.pos): # Sair se clicar em sair 
+                    pg.quit()
+                    sys.exit()
+
+        # Botão reiniciar com efeito 
+        pg.draw.rect(tela, CINZA_ESCURO, botao_reiniciar_rect.inflate(10, 10), border_radius=15)  
+        pg.draw.rect(tela, cor_botao_reiniciar, botao_reiniciar_rect, border_radius=15)
+        tela.blit(texto_botao_reiniciar, texto_botao_reiniciar.get_rect(center=botao_reiniciar_rect.center))
+
+        # Botão sair com efeito 
+        pg.draw.rect(tela, CINZA_ESCURO, botao_sair_rect.inflate(10, 10), border_radius=15)  
+        pg.draw.rect(tela, cor_botao_sair, botao_sair_rect, border_radius=15)
+        tela.blit(texto_botao_sair, texto_botao_sair.get_rect(center=botao_sair_rect.center))
+
+        pg.display.flip()
 
 # Executar jogo
 if __name__ == "__main__":
     tela_inicial()
-    jogo()
+    vencedor, total_coletaveis = jogo()  
+    tela_final(vencedor, total_coletaveis)  
