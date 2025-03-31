@@ -132,6 +132,7 @@ def jogo():
     tempo_restante = 60000  # 1 minuto 
     tempo_inicial = pg.time.get_ticks()
     fonte_tempo = pg.font.Font(None, 50)
+    fonte_info = pg.font.Font(None, 40)
 
     FPS = 60
     jogador = Player(LARGURA // 2, ALTURA - 100, 2, 5)
@@ -149,6 +150,10 @@ def jogo():
         tempo_decorrido = tempo_atual - tempo_inicial
         tempo_restante -= tempo_decorrido  
         tempo_inicial = tempo_atual  
+        qtd_agua = 0 # Bebidas 
+        qtd_beats = 0
+        qtd_vida = 3
+
 
         for evento in pg.event.get():
             if evento.type == pg.QUIT:  
@@ -182,9 +187,21 @@ def jogo():
 
         pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 50), 0, 100, 35), border_radius=3)  
         tempo_segundos = max (0,tempo_restante // 1000)
-        texto_tempo = fonte_tempo.render(f"00:{tempo_segundos}", True, BRANCO)  
+        texto_tempo = fonte_tempo.render(f"00:{tempo_segundos}", True, CINZA_ESCURO)  
         rect_tempo = texto_tempo.get_rect(center=(LARGURA // 2,  19))
         tela.blit(texto_tempo, rect_tempo.topleft)
+
+        # Retângulo amarelo no canto superior direito
+        pg.draw.rect(tela, (215, 215, 0), (10, 10, 160, 70), border_radius=10)
+        pg.draw.rect(tela, (255, 165, 0), (10, 10, 160, 70), 3, border_radius=10)  # Borda laranja
+        sombra = pg.Surface((160, 70), pg.SRCALPHA)
+        sombra.fill((255, 255, 0, 100))  # Sombra amarela translúcida
+        tela.blit(sombra, (12, 12))
+
+        texto_beats = fonte_info.render(f"Beats: {qtd_beats}", True, CINZA_ESCURO)
+        texto_agua = fonte_info.render(f"Agua: {qtd_agua}", True, CINZA_ESCURO)
+        tela.blit(texto_beats, (20, 20))
+        tela.blit(texto_agua, (20, 45))
 
         pg.display.update()
     
@@ -261,3 +278,4 @@ if __name__ == "__main__":
     tela_inicial()
     vencedor, total_coletaveis = jogo()  
     tela_final(vencedor, total_coletaveis)  
+
