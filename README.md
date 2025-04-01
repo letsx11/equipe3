@@ -1,11 +1,11 @@
 # NaLadeira - Jogo 2D em Python com Pygame: 
 
 ## Membros da equipe:
-- Andrya
+- Andrya Gabryelle Santos de Araujo
 - Clara Dias Guimarâes
 - Gabriela Alves Fernandes Vieira
 - Gabriela Marques de Rangel Moreira
-- Iago
+- Iago Lopes da Silva
 - Leticia Santos Xavier
 
 
