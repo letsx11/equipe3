@@ -23,13 +23,13 @@ fonte_botao = pg.font.Font(None, 60)
 
 # Fundo da tela inicial 
 escala = 5 # Escala para pixelar as imagens (quanto maior, mais pixelado)
-fundo_tela_inicial = pg.image.load("olinda-carnaval.webp")
+fundo_tela_inicial = pg.image.load("imagens/background.jpg")
 fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
 fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // escala, ALTURA // escala ))
 fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
-fundo_tela_jogo = pg.image.load("Ladeira_da_Misericorida_Olinda.webp")
+fundo_tela_jogo = pg.image.load("imagens/Ladeira_da_Misericorida_Olinda.webp")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
 fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala ))
 fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
@@ -47,7 +47,7 @@ botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, text
 botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
 
 # Música 
-pg.mixer.music.load("marcelorossiter-voltei-recife-8e035859.mp3")
+pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
 
 # Tela inicial
