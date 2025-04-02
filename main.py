@@ -180,6 +180,17 @@ def jogo():
         tempo_restante -= tempo_decorrido  
         tempo_inicial = tempo_atual  
 
+        if tempo_restante == 25:
+            Coletavel.velocidade += 10
+            intervalo_spawn == 1500
+        elif tempo_restante == 15:
+            Coletavel.velocidade += 15
+            intervalo_spawn = 500
+        elif tempo_restante == 10:
+            intervalo_spawn = 200
+            Coletavel.velocidade += 15
+
+
         # Cria novos objetos caindo
         if pg.time.get_ticks() - tempo_ultimo_spawn > intervalo_spawn:
             x_random = random.randint(0, LARGURA - 40)
@@ -216,7 +227,7 @@ def jogo():
         coletados = pg.sprite.spritecollide(jogador, coletaveis, True)
         for item in coletados:
             if item.tipo == "agua":
-                tempo_restante += 5000 # Aumenta tempo
+                tempo_restante += 2000 # Aumenta tempo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
                 jogador.velocidade += 2 # Aumenta veloc 
