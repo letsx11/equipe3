@@ -152,7 +152,7 @@ def jogo():
         # Atualizar tela do jogo
         tela.blit(fundo_tela_jogo, (0, 0))
         jogador.move(esquerda, direita, LARGURA)
-        jogador.draw()
+        jogador.draw(tela)
 
         pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 50), 0, 100, 35), border_radius=3)  
         tempo_segundos = max (0,tempo_restante // 1000)
