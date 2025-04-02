@@ -1,6 +1,6 @@
 import pygame as pg
 import sys
-from player import Player
+import random
 
 pg.init()
 pg.mixer.init()
@@ -18,26 +18,26 @@ VERDE = (0, 255, 0)
 VERDE_ESCURO = (0, 180, 0)
 CINZA_ESCURO = (50, 50, 50)
 
-# Fonte
-fonte_botao = pg.font.Font(None, 60)
+# Fonte 
+fonte = pg.font.Font('fonte3.ttf', 30)
 
 # Fundo da tela inicial 
 escala = 5 # Escala para pixelar as imagens (quanto maior, mais pixelado)
-fundo_tela_inicial = pg.image.load("imagens/background.jpg")
+fundo_tela_inicial = pg.image.load("olinda-carnaval.webp")
 fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
 fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // escala, ALTURA // escala ))
 fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
-fundo_tela_jogo = pg.image.load("imagens/Ladeira_da_Misericorida_Olinda.webp")
+fundo_tela_jogo = pg.image.load("Ladeira_da_Misericorida_Olinda.webp")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
-fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala ))
+fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala )) # pixelar
 fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
 
 # Botões
-texto_botao = fonte_botao.render("Iniciar Jogo", True, BRANCO)
-texto_botao_sair = fonte_botao.render("Sair", True, BRANCO)
-texto_botao_reiniciar = fonte_botao.render("Jogar Novamente", True, BRANCO)
+texto_botao = fonte.render("Iniciar Jogo", True, BRANCO)
+texto_botao_sair = fonte.render("Sair", True, BRANCO)
+texto_botao_reiniciar = fonte.render("Jogar Novamente", True, BRANCO)
 
 botao_rect = pg.Rect(0, 0, texto_botao.get_width() + 40, texto_botao.get_height() + 20)
 botao_rect.center = (LARGURA // 2, ALTURA // 2 - 20)
@@ -47,8 +47,62 @@ botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, text
 botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
 
 # Música 
-pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
+pg.mixer.music.load("marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
+
+# Classe coletáveis (Super classe)
+class Coletavel(pg.sprite.Sprite):
+    def __init__(self, x, y, velocidade, tipo):
+        super().__init__()
+        
+        if tipo == "agua":
+            self.image = pg.image.load("agua.png")  # Imagem água
+        elif tipo == "beats":
+            self.image = pg.image.load("beats.png")  # Imagem beats
+        else:
+            self.image = pg.image.load("pitu.png") # Imagem pitu
+
+        self.image = pg.transform.scale(self.image, (40, 50))  
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+        self.velocidade = velocidade
+        self.tipo = tipo  # Salva os tipos
+
+    def update(self):
+        self.rect.y += self.velocidade  
+        if self.rect.top > ALTURA:  # Remove se sair da tela
+            self.kill()
+
+# Classe do jogador
+class Player(pg.sprite.Sprite):
+    def __init__(self, x, y, velocidade):
+        pg.sprite.Sprite.__init__(self)
+        img = pg.image.load('imagem player.jpg')
+        self.velocidade = velocidade
+        self.virar = False
+        self.direcao = 1
+        self.imagem = pg.transform.scale(img, (60, 80))
+        self.rect = self.imagem.get_rect()
+        self.rect.center = (x, y)
+    
+    def move(self, andaresquerda, andardireita, largura):
+        dx = 0
+        if(self.rect.x <= 0):
+            self.rect.x = 0
+        if(self.rect.x >= largura - self.imagem.get_width()):
+            self.rect.x = largura - self.imagem.get_width()
+        if(andaresquerda):
+            dx = -self.velocidade
+            self.virar = True
+            self.direcao = -1
+        if(andardireita):
+            dx = self.velocidade
+            self.virar = False
+            self.direcao = 1
+        self.rect.x += dx
+    
+    def draw(self):
+        tela.blit(pg.transform.flip(self.imagem, self.virar, False), self.rect)
 
 # Tela inicial
 def tela_inicial():
@@ -91,26 +145,32 @@ def tela_inicial():
 
         pg.display.flip()
     
-
 # Função principal do jogo
 def jogo():
+
+    coletaveis = pg.sprite.Group()
+    tempo_ultimo_spawn = pg.time.get_ticks()
+    intervalo_spawn = 2000  # Tempo entre cada spawn (2 segundos)
+
     global vencedor
     global total_coletaveis  
 
     relogio = pg.time.Clock()
     tempo_restante = 60000  # 1 minuto 
     tempo_inicial = pg.time.get_ticks()
-    fonte_tempo = pg.font.Font(None, 50)
-    fonte_info = pg.font.Font(None, 40)
 
     FPS = 60
-    jogador = Player(LARGURA // 2, ALTURA - 100, 2, 5)
+    jogador = Player(LARGURA // 2, ALTURA - 100, 5)
     esquerda = direita = False
 
     total_coletaveis = 0  
+    qtd_agua = 0 
+    qtd_beats = 0
+    qtd_vida = 3
 
     vencedor = False  
     rodando = True  
+
     while rodando:
         relogio.tick(FPS)
 
@@ -119,11 +179,21 @@ def jogo():
         tempo_decorrido = tempo_atual - tempo_inicial
         tempo_restante -= tempo_decorrido  
         tempo_inicial = tempo_atual  
-        qtd_agua = 0 # Bebidas 
-        qtd_beats = 0
-        qtd_vida = 3
 
+        # Cria novos objetos caindo
+        if pg.time.get_ticks() - tempo_ultimo_spawn > intervalo_spawn:
+            x_random = random.randint(0, LARGURA - 40)
 
+            # Escolhe aleatoriamente qual coletável vai ser
+            tipo_coletavel = random.choice(["agua", "beats", "pitu"])
+            
+            novo_coletavel = Coletavel(x_random, -50, 5, tipo_coletavel)  
+            coletaveis.add(novo_coletavel)  
+            tempo_ultimo_spawn = pg.time.get_ticks()
+        
+        coletaveis.update()
+
+        # Processamento de eventos
         for evento in pg.event.get():
             if evento.type == pg.QUIT:  
                 pg.quit()
@@ -142,35 +212,49 @@ def jogo():
                 if evento.key == pg.K_d:
                     direita = False
         
+        # Verifica se o player coletou algum item
+        coletados = pg.sprite.spritecollide(jogador, coletaveis, True)
+        for item in coletados:
+            if item.tipo == "agua":
+                qtd_agua += 1  # Aumenta a contagem de água
+            elif item.tipo == "beats":
+                qtd_beats += 1  # Aumenta a contagem de beats
+            else:
+                qtd_vida -= 1 
+                if qtd_vida == 0:
+                    rodando = False
+        
+        total_coletaveis = qtd_agua + qtd_beats
+                
         # Verifica se o tempo acabou
-        if tempo_restante <= 0 or jogador.vidas == 0:  
+        if tempo_restante <= 0:  
             vencedor = True 
             rodando = False  # Sai do loop
 
-        # Aqui adiciona condição para verificar se as vidas acabaram
-
         # Atualizar tela do jogo
         tela.blit(fundo_tela_jogo, (0, 0))
+        coletaveis.draw(tela)
         jogador.move(esquerda, direita, LARGURA)
-        jogador.draw(tela)
+        jogador.draw()
 
-        pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 50), 0, 100, 35), border_radius=3)  
+        # Contagem tempo
+        pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 60), 0, 120, 35), border_radius=3)  
+        pg.draw.rect(tela, (255, 165, 0), (((LARGURA // 2) - 60), 0, 120, 35), 3, border_radius=3)  # Borda laranja
         tempo_segundos = max (0,tempo_restante // 1000)
-        texto_tempo = fonte_tempo.render(f"00:{tempo_segundos}", True, CINZA_ESCURO)  
-        rect_tempo = texto_tempo.get_rect(center=(LARGURA // 2,  19))
+        texto_tempo = fonte.render(f"00:{tempo_segundos}", True, BRANCO)  
+        rect_tempo = texto_tempo.get_rect(center=(LARGURA // 2,  15))
         tela.blit(texto_tempo, rect_tempo.topleft)
 
-        # Retângulo amarelo no canto superior direito
-        pg.draw.rect(tela, (215, 215, 0), (10, 10, 160, 70), border_radius=10)
-        pg.draw.rect(tela, (255, 165, 0), (10, 10, 160, 70), 3, border_radius=10)  # Borda laranja
+        # Contagem de itens coletados 
+        pg.draw.rect(tela, VERMELHO, (10, 0, 190, 70), border_radius=3)
+        pg.draw.rect(tela, (255, 165, 0), (10, 0, 190, 70), 3, border_radius=3)  # Borda laranja
         sombra = pg.Surface((160, 70), pg.SRCALPHA)
-        sombra.fill((255, 255, 0, 100))  # Sombra amarela translúcida
         tela.blit(sombra, (12, 12))
 
-        texto_beats = fonte_info.render(f"Beats: {qtd_beats}", True, CINZA_ESCURO)
-        texto_agua = fonte_info.render(f"Agua: {qtd_agua}", True, CINZA_ESCURO)
-        tela.blit(texto_beats, (20, 20))
-        tela.blit(texto_agua, (20, 45))
+        texto_beats = fonte.render(f"Beats:{qtd_beats}", True, BRANCO)
+        texto_agua = fonte.render(f"Agua:{qtd_agua}", True, BRANCO)
+        tela.blit(texto_beats, (15, 0))
+        tela.blit(texto_agua, (15, 30))
 
         pg.display.update()
     
@@ -179,8 +263,7 @@ def jogo():
 
 # Tela final
 def tela_final(vencedor, total_coletaveis):
-    rodando = True
-    fonte_mensagem = pg.font.Font(None, 40)  
+    rodando = True 
     largura_mensagem = 500  
     altura_mensagem = 70
 
@@ -198,16 +281,16 @@ def tela_final(vencedor, total_coletaveis):
 
         # Definir mensagem conforme resultado
         if vencedor:
-            mensagem = f"Parabéns! Você coletou {total_coletaveis} itens!"      
+            mensagem = f"Você coletou {total_coletaveis} itens!"      
         else:
-            mensagem = "Infelizmente suas vidas acabaram antes do tempo."
+            mensagem = "Suas vidas acabaram :/"
 
         retangulo_mensagem = pg.Rect(0, 0, largura_mensagem, altura_mensagem)
         retangulo_mensagem.center = (LARGURA // 2, ALTURA // 2)
         pg.draw.rect(tela, CINZA_ESCURO, retangulo_mensagem, border_radius=15)  
         pg.draw.rect(tela, BRANCO, retangulo_mensagem.inflate(-10, -10), border_radius=15)  
        
-        texto_mensagem = fonte_mensagem.render(mensagem, True, CINZA_ESCURO)
+        texto_mensagem = fonte.render(mensagem, True, CINZA_ESCURO)
         rect_mensagem = texto_mensagem.get_rect(center=(LARGURA // 2, ALTURA//2))
         tela.blit(texto_mensagem, rect_mensagem)
 
