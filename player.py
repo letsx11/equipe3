@@ -4,7 +4,8 @@ class Player(pg.sprite.Sprite):
     #Inicializando a classe com atributos de posição, escala da imagem, velocidade e etc...
     def __init__(self, x, y, escala, velocidade):
         pg.sprite.Sprite.__init__(self)
-        img = pg.image.load(f'imagem/0.png')
+        img = pg.image.load(f'imagens/0.png')
+        self.vidas = 3
         self.direcao = 1
         self.virar = True
         self.velocidade = velocidade
@@ -30,6 +31,8 @@ class Player(pg.sprite.Sprite):
     #Método que faz com que o personagem seja impresso na tela do jogo.
     def draw(self, tela):
        tela.blit(pg.transform.flip(self.imagem, self.virar, False), self.rect)
+    def lose_lives(self):
+        self.vidas-=1
         
 
     
