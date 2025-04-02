@@ -143,7 +143,7 @@ def jogo():
                     direita = False
         
         # Verifica se o tempo acabou
-        if tempo_restante <= 0:  
+        if tempo_restante <= 0 or jogador.vidas == 0:  
             vencedor = True 
             rodando = False  # Sai do loop
 
