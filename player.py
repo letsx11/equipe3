@@ -31,6 +31,7 @@ class Player(pg.sprite.Sprite):
     #Método que faz com que o personagem seja impresso na tela do jogo.
     def draw(self, tela):
        tela.blit(pg.transform.flip(self.imagem, self.virar, False), self.rect)
+    #Metódo responsavel por diminuir a vida do personagem.
     def lose_lives(self):
         self.vidas-=1
         
