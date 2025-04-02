@@ -156,7 +156,7 @@ def jogo():
     global total_coletaveis  
 
     relogio = pg.time.Clock()
-    tempo_restante = 60000  # 1 minuto 
+    tempo_restante = 35000  # 35 segundos 
     tempo_inicial = pg.time.get_ticks()
 
     FPS = 60
@@ -216,8 +216,10 @@ def jogo():
         coletados = pg.sprite.spritecollide(jogador, coletaveis, True)
         for item in coletados:
             if item.tipo == "agua":
+                tempo_restante += 5000 # Aumenta tempo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
+                jogador.velocidade += 2 # Aumenta veloc 
                 qtd_beats += 1  # Aumenta a contagem de beats
             else:
                 qtd_vida -= 1 
@@ -264,7 +266,7 @@ def jogo():
 # Tela final
 def tela_final(vencedor, total_coletaveis):
     rodando = True 
-    largura_mensagem = 500  
+    largura_mensagem = 600  
     altura_mensagem = 70
 
     while rodando:
