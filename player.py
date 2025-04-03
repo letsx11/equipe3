@@ -60,6 +60,7 @@ class Player(pg.sprite.Sprite):
         if pg.time.get_ticks()-self.update_time > cooldown:
             self.update_time = pg.time.get_ticks()
             self.indiceframe += 1
+        #Caso a lista chegue ao fim, faz com que retorne ao começo, iniciando assim o loop da animação
         if self.indiceframe >= len(self.lista_animacao[self.acao]):
             self.indiceframe = 0
             
