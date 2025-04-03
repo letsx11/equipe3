@@ -21,17 +21,17 @@ VERDE_ESCURO = (0, 180, 0)
 CINZA_ESCURO = (50, 50, 50)
 
 # Fonte 
-fonte = pg.font.Font('fonte3.ttf', 30)
+fonte = pg.font.Font('fontes/fonte3.ttf', 30)
 
 # Fundo da tela inicial 
 escala = 5 # Escala para pixelar as imagens (quanto maior, mais pixelado)
-fundo_tela_inicial = pg.image.load("olinda-carnaval.webp")
+fundo_tela_inicial = pg.image.load("imagens/olinda-carnaval.webp")
 fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
 fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // escala, ALTURA // escala ))
 fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
-fundo_tela_jogo = pg.image.load("Ladeira_da_Misericorida_Olinda.webp")
+fundo_tela_jogo = pg.image.load("imagens/Ladeira_da_Misericorida_Olinda.webp")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
 fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala )) # pixelar
 fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
@@ -49,7 +49,7 @@ botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, text
 botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
 
 # Música 
-pg.mixer.music.load("marcelorossiter-voltei-recife-8e035859.mp3")
+pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
 
 # Tela inicial
@@ -108,7 +108,7 @@ def jogo():
     tempo_inicial = pg.time.get_ticks()
 
     FPS = 60
-    jogador = Player(LARGURA // 2, ALTURA - 100, 5)
+    jogador = Player(LARGURA // 2, ALTURA - 100, 2, 5)
     esquerda = direita = False
 
     total_coletaveis = 0  
@@ -196,7 +196,7 @@ def jogo():
         tela.blit(fundo_tela_jogo, (0, 0))
         coletaveis.draw(tela)
         jogador.move(esquerda, direita, LARGURA)
-        jogador.draw()
+        jogador.draw(tela)
 
         # Contagem tempo
         pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 60), 0, 120, 35), border_radius=3)  
