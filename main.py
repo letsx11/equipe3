@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 import random
+from player import Player 
 
 pg.init()
 pg.mixer.init()
@@ -72,37 +73,6 @@ class Coletavel(pg.sprite.Sprite):
         self.rect.y += self.velocidade  
         if self.rect.top > ALTURA:  # Remove se sair da tela
             self.kill()
-
-# Classe do jogador
-class Player(pg.sprite.Sprite):
-    def __init__(self, x, y, velocidade):
-        pg.sprite.Sprite.__init__(self)
-        img = pg.image.load('imagem player.jpg')
-        self.velocidade = velocidade
-        self.virar = False
-        self.direcao = 1
-        self.imagem = pg.transform.scale(img, (60, 80))
-        self.rect = self.imagem.get_rect()
-        self.rect.center = (x, y)
-    
-    def move(self, andaresquerda, andardireita, largura):
-        dx = 0
-        if(self.rect.x <= 0):
-            self.rect.x = 0
-        if(self.rect.x >= largura - self.imagem.get_width()):
-            self.rect.x = largura - self.imagem.get_width()
-        if(andaresquerda):
-            dx = -self.velocidade
-            self.virar = True
-            self.direcao = -1
-        if(andardireita):
-            dx = self.velocidade
-            self.virar = False
-            self.direcao = 1
-        self.rect.x += dx
-    
-    def draw(self):
-        tela.blit(pg.transform.flip(self.imagem, self.virar, False), self.rect)
 
 # Tela inicial
 def tela_inicial():
