@@ -15,12 +15,16 @@ class Player(pg.sprite.Sprite):
         self.acao = 0
         self.update_time = pg.time.get_ticks()
         listatemp = []
+        
+        #Armazena todos os frames da animação em que o personagem esta parado no indice 0 da lista de animação
         for i in range(2):
             img = pg.image.load(f'imagens/spritesheet/Idle/{i}.png')
             img = pg.transform.scale(img, (int(img.get_width()*escala), int(img.get_height()*escala)))
             listatemp.append(img)
         self.lista_animacao.append(listatemp)
         listatemp=[]
+
+        #Armazena todos os frames da animação em que o personagem esta correndo no indice 1 da lista de animação
         for i in range(5):
             img = pg.image.load(f'imagens/spritesheet/Run/{i}.png')
             img = pg.transform.scale(img, (int(img.get_width()*escala), int(img.get_height()*escala)))
