@@ -108,7 +108,7 @@ def jogo():
     tempo_inicial = pg.time.get_ticks()
 
     FPS = 60
-    jogador = Player(LARGURA // 2, ALTURA - 100, 2, 5)
+    jogador = Player(LARGURA // 2, ALTURA - 100, 1, 5)
     esquerda = direita = False
 
     total_coletaveis = 0  
@@ -195,8 +195,13 @@ def jogo():
         # Atualizar tela do jogo
         tela.blit(fundo_tela_jogo, (0, 0))
         coletaveis.draw(tela)
-        jogador.move(esquerda, direita, LARGURA)
+        jogador.update_animation()
         jogador.draw(tela)
+        if esquerda or direita:
+            jogador.update_action(1)
+        else:
+            jogador.update_action(0) 
+        jogador.move(esquerda, direita, LARGURA)
 
         # Contagem tempo
         pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 60), 0, 120, 35), border_radius=3)  
