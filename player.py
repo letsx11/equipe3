@@ -62,7 +62,7 @@ class Player(pg.sprite.Sprite):
         if self.indiceframe >= len(self.lista_animacao[self.acao]):
             self.indiceframe = 0
             
-    #Método responsavel por passar de uma açaõ para a outra (personagem parado, personagem correndo)
+    #Método responsavel por passar de uma açaõ para a outra (personagem parado -> personagem correndo e vice-versa)
     def update_action(self, nova_acao):
         if nova_acao != self.acao:
             self.acao = nova_acao
