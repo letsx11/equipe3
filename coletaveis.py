@@ -1,3 +1,5 @@
+import pygame as pg
+
 # Classe coletáveis (Super classe)
 class Coletavel(pg.sprite.Sprite):
     def __init__(self, x, y, velocidade, tipo):
