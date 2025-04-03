@@ -54,6 +54,7 @@ class Player(pg.sprite.Sprite):
         
     #Método responsável por percorrer os quadros da animaçaõ do personagem
     def update_animation(self):
+        #Tempo entre um quadro e outro da animação (neste caso, 100 milisegundos)
         cooldown = 100
         self.imagem = self.lista_animacao[self.acao][self.indiceframe]
         if pg.time.get_ticks()-self.update_time > cooldown:
