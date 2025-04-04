@@ -52,6 +52,20 @@ botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
 pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
 
+# Função vidas
+imagem_vida = pg.image.load('coracao_vida.png').convert_alpha()
+imagem_vida = pg.transform.scale(imagem_vida, (40, 40))  
+imagem_sem_vida = pg.image.load('coracao_sem_vida.png').convert_alpha()
+imagem_sem_vida = pg.transform.scale(imagem_sem_vida, (40, 40))  
+def desenhar_vidas(qtd_vida):
+    for i in range(3):
+        x = LARGURA - (i + 1) * 45
+        y = 10
+        if i < qtd_vida:
+            tela.blit(imagem_vida, (x, y))
+        else:
+            tela.blit(imagem_sem_vida, (x, y))
+
 # Tela inicial
 def tela_inicial():
     rodando = True
@@ -222,6 +236,8 @@ def jogo():
         tela.blit(texto_beats, (15, 0))
         tela.blit(texto_agua, (15, 30))
 
+        desenhar_vidas(qtd_vida)
+        
         pg.display.update()
     
     tela_final(vencedor, total_coletaveis)
