@@ -31,7 +31,7 @@ fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // esca
 fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
-fundo_tela_jogo = pg.image.load("imagens/Ladeira_da_Misericorida_Olinda.webp")
+fundo_tela_jogo = pg.image.load("imagens/ladeira_olinda.png")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
 fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala )) # pixelar
 fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
