@@ -57,6 +57,7 @@ imagem_vida = pg.image.load('coracao_vida.png').convert_alpha()
 imagem_vida = pg.transform.scale(imagem_vida, (40, 40))  
 imagem_sem_vida = pg.image.load('coracao_sem_vida.png').convert_alpha()
 imagem_sem_vida = pg.transform.scale(imagem_sem_vida, (40, 40))  
+
 def desenhar_vidas(qtd_vida):
     for i in range(3):
         x = LARGURA - (i + 1) * 45
