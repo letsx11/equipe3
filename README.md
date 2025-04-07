@@ -2,7 +2,7 @@
 
 ## Membros da equipe:
 - Andrya Gabryelle Santos de Araujo
-- Clara Dias Guimarâes
+- Clara Dias Guimarães
 - Gabriela Alves Fernandes Vieira
 - Gabriela Marques de Rangel Moreira
 - Iago Lopes da Silva
