@@ -1,16 +1,21 @@
 import pygame as pg
 
+LARGURA, ALTURA = 700, 600
+
 # Classe coletáveis (Super classe)
-class Coletavel(pg.sprite.Sprite):
-    def __init__(self, x, y, velocidade, tipo):
+class Coletavel(pg.sprite.Sprite) :
+    def __init__(self, x, y, velocidade, tipo) :
         super().__init__()
         
-        if tipo == "agua":
-            self.image = pg.image.load("agua.png")  # Imagem água
-        elif tipo == "beats":
-            self.image = pg.image.load("beats.png")  # Imagem beats
-        else:
-            self.image = pg.image.load("pitu.png") # Imagem pitu
+        if tipo == "agua" :
+            # Imagem água
+            self.image = pg.image.load("imagens/agua.png")  
+        elif tipo == "beats" :
+            # Imagem beats
+            self.image = pg.image.load("imagens/beats.png")  
+        else :
+            # Imagem pitu
+            self.image = pg.image.load("imagens/pitu.png") 
 
         self.image = pg.transform.scale(self.image, (40, 50))  
         self.rect = self.image.get_rect()
@@ -18,7 +23,8 @@ class Coletavel(pg.sprite.Sprite):
         self.velocidade = velocidade
         self.tipo = tipo  # Salva os tipos
 
-    def update(self):
+    def update(self) :
         self.rect.y += self.velocidade  
-        if self.rect.top > ALTURA:  # Remove se sair da tela
+        # Remove se sair da tela
+        if self.rect.top > ALTURA :  
             self.kill()
