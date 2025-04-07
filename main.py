@@ -24,38 +24,36 @@ CINZA_ESCURO = (50, 50, 50)
 fonte = pg.font.Font('fontes/fonte3.ttf', 30)
 
 # Fundo da tela inicial 
-escala = 5 # Escala para pixelar as imagens (quanto maior, mais pixelado)
-fundo_tela_inicial = pg.image.load("imagens/olinda-carnaval.webp")
+fundo_tela_inicial = pg.image.load("imagens/capa_inicial.png")
 fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
-fundo_reduzido_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA // escala, ALTURA // escala ))
-fundo_tela_incial = pg.transform.scale(fundo_reduzido_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
 fundo_tela_jogo = pg.image.load("imagens/ladeira_olinda.png")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
-fundo_reduzido_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA // escala, ALTURA // escala )) # pixelar
-fundo_tela_jogo = pg.transform.scale(fundo_reduzido_jogo, (LARGURA, ALTURA))
 
 # Botões
-texto_botao = fonte.render("Iniciar Jogo", True, BRANCO)
+texto_botao = fonte.render("Iniciar", True, BRANCO)
 texto_botao_sair = fonte.render("Sair", True, BRANCO)
-texto_botao_reiniciar = fonte.render("Jogar Novamente", True, BRANCO)
+texto_botao_sair_final = fonte.render("Sair", True, BRANCO)
+texto_botao_reiniciar = fonte.render(f"Jogar Novamente", True, BRANCO)
 
 botao_rect = pg.Rect(0, 0, texto_botao.get_width() + 40, texto_botao.get_height() + 20)
-botao_rect.center = (LARGURA // 2, ALTURA // 2 - 20)
+botao_rect.center = (300, 551)
 botao_sair_rect = pg.Rect(0, 0, texto_botao_sair.get_width() + 40, texto_botao_sair.get_height() + 20)
-botao_sair_rect.center = (LARGURA // 2, ALTURA // 2 + 120)
+botao_sair_rect.center = (410, 551)
+botao_sair_final_rect = pg.Rect(0, 0, texto_botao_sair_final.get_width() + 40, texto_botao_sair.get_height() + 20)
+botao_sair_final_rect.center = (LARGURA/2, 500)
 botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, texto_botao_reiniciar.get_height() + 20)
-botao_reiniciar_rect.center = (LARGURA // 2, ALTURA // 2 + 220)
+botao_reiniciar_rect.center = (353, 551)
 
 # Música 
 pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
 
 # Função vidas
-imagem_vida = pg.image.load('coracao_vida.png').convert_alpha()
+imagem_vida = pg.image.load('imagens/coracao_vida.png').convert_alpha()
 imagem_vida = pg.transform.scale(imagem_vida, (40, 40))  
-imagem_sem_vida = pg.image.load('coracao_sem_vida.png').convert_alpha()
+imagem_sem_vida = pg.image.load('imagens/coracao_sem_vida.png').convert_alpha()
 imagem_sem_vida = pg.transform.scale(imagem_sem_vida, (40, 40))  
 
 def desenhar_vidas(qtd_vida):
@@ -94,7 +92,7 @@ def tela_inicial():
                     pg.quit()
                     sys.exit()
             
-        tela.blit(fundo_tela_incial, (0, 0))
+        tela.blit(fundo_tela_inicial, (0, 0))
 
         # Botão iniciar com efeito 
         pg.draw.rect(tela, CINZA_ESCURO, botao_rect.inflate(10, 10), border_radius=15)  
@@ -113,13 +111,13 @@ def jogo():
 
     coletaveis = pg.sprite.Group()
     tempo_ultimo_spawn = pg.time.get_ticks()
-    intervalo_spawn = 2000  # Tempo entre cada spawn (2 segundos)
+    intervalo_spawn = 1000  # Tempo entre cada spawn (1 segundos)
 
     global vencedor
     global total_coletaveis  
 
     relogio = pg.time.Clock()
-    tempo_restante = 35000  # 35 segundos 
+    tempo_restante = 30000  # 30 segundos 
     tempo_inicial = pg.time.get_ticks()
 
     FPS = 60
@@ -190,10 +188,10 @@ def jogo():
         coletados = pg.sprite.spritecollide(jogador, coletaveis, True)
         for item in coletados:
             if item.tipo == "agua":
-                tempo_restante += 2000 # Aumenta tempo
+                tempo_restante += 1000 # Aumenta tempo em 1 segundo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
-                jogador.velocidade += 2 # Aumenta veloc 
+                jogador.velocidade += 1 # Aumenta velocidade
                 qtd_beats += 1  # Aumenta a contagem de beats
             else:
                 qtd_vida -= 1 
@@ -260,7 +258,7 @@ def tela_final(vencedor, total_coletaveis):
                 pg.quit()
                 sys.exit() 
                 
-        tela.blit(fundo_tela_incial, (0, 0))
+        tela.blit(fundo_tela_inicial, (0, 0))
 
         # Definir mensagem conforme resultado
         if vencedor:
@@ -279,7 +277,7 @@ def tela_final(vencedor, total_coletaveis):
 
 
         cor_botao_reiniciar = VERDE if botao_reiniciar_rect.collidepoint(mouse_pos) else VERDE_ESCURO
-        cor_botao_sair = VERMELHO if botao_sair_rect.collidepoint(mouse_pos) else VERMELHO_ESCURO
+        cor_botao_sair = VERMELHO if botao_sair_final_rect.collidepoint(mouse_pos) else VERMELHO_ESCURO
 
         for evento in pg.event.get():
             if evento.type == pg.KEYDOWN: # Sair se apertar em ESC
@@ -292,7 +290,7 @@ def tela_final(vencedor, total_coletaveis):
             if evento.type == pg.MOUSEBUTTONDOWN:
                 if botao_reiniciar_rect.collidepoint(evento.pos):
                     jogo()
-                if botao_sair_rect.collidepoint(evento.pos): # Sair se clicar em sair 
+                if botao_sair_final_rect.collidepoint(evento.pos): # Sair se clicar em sair 
                     pg.quit()
                     sys.exit()
 
@@ -302,9 +300,9 @@ def tela_final(vencedor, total_coletaveis):
         tela.blit(texto_botao_reiniciar, texto_botao_reiniciar.get_rect(center=botao_reiniciar_rect.center))
 
         # Botão sair com efeito 
-        pg.draw.rect(tela, CINZA_ESCURO, botao_sair_rect.inflate(10, 10), border_radius=15)  
-        pg.draw.rect(tela, cor_botao_sair, botao_sair_rect, border_radius=15)
-        tela.blit(texto_botao_sair, texto_botao_sair.get_rect(center=botao_sair_rect.center))
+        pg.draw.rect(tela, CINZA_ESCURO, botao_sair_final_rect.inflate(10, 10), border_radius=15)  
+        pg.draw.rect(tela, cor_botao_sair, botao_sair_final_rect, border_radius=15)
+        tela.blit(texto_botao_sair_final, texto_botao_sair_final.get_rect(center=botao_sair_final_rect.center))
 
         pg.display.flip()
 
@@ -313,4 +311,3 @@ if __name__ == "__main__":
     tela_inicial()
     vencedor, total_coletaveis = jogo()  
     tela_final(vencedor, total_coletaveis)  
-
