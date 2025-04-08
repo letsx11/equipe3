@@ -19,9 +19,12 @@ VERMELHO_ESCURO = (180, 0, 0)
 VERDE = (0, 255, 0)
 VERDE_ESCURO = (0, 180, 0)
 CINZA_ESCURO = (50, 50, 50)
+MARROM = (77, 38, 0)
 
 # Fonte 
-fonte = pg.font.Font('fontes/fonte3.ttf', 30)
+fonte = pg.font.Font('fontes/fonte3.ttf', 13)
+fonte2 = pg.font.Font('fontes/fonte3 (1).ttf', 33)
+fonte3 = pg.font.Font('fontes/fonte3 (2).ttf', 20)
 
 # Fundo da tela inicial 
 fundo_tela_inicial = pg.image.load("imagens/capa_inicial.png")
@@ -31,10 +34,14 @@ fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
 fundo_tela_jogo = pg.image.load("imagens/ladeira_olinda.png")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
 
+# Fundo tela final 
+fundo_tela_final = pg.image.load("imagens/capa_final.png")
+fundo_tela_final = pg.transform.scale(fundo_tela_final, (LARGURA, ALTURA))
+
 # Botões
 texto_botao = fonte.render("Iniciar", True, BRANCO)
 texto_botao_sair = fonte.render("Sair", True, BRANCO)
-texto_botao_sair_final = fonte.render("Sair", True, BRANCO)
+texto_botao_sair_final = fonte3.render("Sair", True, BRANCO)
 texto_botao_reiniciar = fonte.render(f"Jogar Novamente", True, BRANCO)
 
 botao_rect = pg.Rect(0, 0, texto_botao.get_width() + 40, texto_botao.get_height() + 20)
@@ -42,9 +49,9 @@ botao_rect.center = (300, 551)
 botao_sair_rect = pg.Rect(0, 0, texto_botao_sair.get_width() + 40, texto_botao_sair.get_height() + 20)
 botao_sair_rect.center = (410, 551)
 botao_sair_final_rect = pg.Rect(0, 0, texto_botao_sair_final.get_width() + 40, texto_botao_sair.get_height() + 20)
-botao_sair_final_rect.center = (LARGURA/2, 500)
+botao_sair_final_rect.center = (LARGURA/2, 477)
 botao_reiniciar_rect = pg.Rect(0,0, texto_botao_reiniciar.get_width() + 40, texto_botao_reiniciar.get_height() + 20)
-botao_reiniciar_rect.center = (353, 551)
+botao_reiniciar_rect.center = (LARGURA/2, 548)
 
 # Música 
 pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
@@ -127,6 +134,7 @@ def jogo():
     total_coletaveis = 0  
     qtd_agua = 0 
     qtd_beats = 0
+    qtd_pitu = 0
     qtd_vida = 3
 
     vencedor = False  
@@ -191,10 +199,11 @@ def jogo():
                 tempo_restante += 1000 # Aumenta tempo em 1 segundo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
-                jogador.velocidade += 1 # Aumenta velocidade
+                jogador.velocidade += 0.5 # Aumenta velocidade
                 qtd_beats += 1  # Aumenta a contagem de beats
             else:
                 qtd_vida -= 1 
+                qtd_pitu += 1 # Aumenta a contagem de pitú
                 if qtd_vida == 0:
                     rodando = False
         
@@ -217,23 +226,23 @@ def jogo():
         jogador.move(esquerda, direita, LARGURA)
 
         # Contagem tempo
-        pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 60), 0, 120, 35), border_radius=3)  
+        pg.draw.rect(tela, VERMELHO, (((LARGURA // 2) - 60), 0, 120, 35), border_radius=3)  # Fundo vermelho 
         pg.draw.rect(tela, (255, 165, 0), (((LARGURA // 2) - 60), 0, 120, 35), 3, border_radius=3)  # Borda laranja
         tempo_segundos = max (0,tempo_restante // 1000)
-        texto_tempo = fonte.render(f"00:{tempo_segundos}", True, BRANCO)  
+        texto_tempo = fonte3.render(f"00:{tempo_segundos}", True, BRANCO)  
         rect_tempo = texto_tempo.get_rect(center=(LARGURA // 2,  15))
         tela.blit(texto_tempo, rect_tempo.topleft)
 
         # Contagem de itens coletados 
-        pg.draw.rect(tela, VERMELHO, (10, 0, 190, 70), border_radius=3)
-        pg.draw.rect(tela, (255, 165, 0), (10, 0, 190, 70), 3, border_radius=3)  # Borda laranja
         sombra = pg.Surface((160, 70), pg.SRCALPHA)
         tela.blit(sombra, (12, 12))
 
-        texto_beats = fonte.render(f"Beats:{qtd_beats}", True, BRANCO)
-        texto_agua = fonte.render(f"Agua:{qtd_agua}", True, BRANCO)
-        tela.blit(texto_beats, (15, 0))
-        tela.blit(texto_agua, (15, 30))
+        texto_beats = fonte3.render(f"Beats:{qtd_beats}", True, BRANCO)
+        texto_agua = fonte3.render(f"Agua:{qtd_agua}", True, BRANCO)
+        texto_pitu = fonte3.render(f"Pitú:{qtd_pitu}", True, BRANCO)
+        tela.blit(texto_beats, (15, 5))
+        tela.blit(texto_agua, (15, 35))
+        tela.blit(texto_pitu, (15, 65))
 
         desenhar_vidas(qtd_vida)
         
@@ -258,21 +267,21 @@ def tela_final(vencedor, total_coletaveis):
                 pg.quit()
                 sys.exit() 
                 
-        tela.blit(fundo_tela_inicial, (0, 0))
+        tela.blit(fundo_tela_final, (0, 0))
 
         # Definir mensagem conforme resultado
         if vencedor:
-            mensagem = f"Você coletou {total_coletaveis} itens!"      
+            mensagem = f"Você ganhou {total_coletaveis} pontos!"      
         else:
             mensagem = "Suas vidas acabaram :/"
 
         retangulo_mensagem = pg.Rect(0, 0, largura_mensagem, altura_mensagem)
-        retangulo_mensagem.center = (LARGURA // 2, ALTURA // 2)
+        retangulo_mensagem.center = (LARGURA // 2, 105)
         pg.draw.rect(tela, CINZA_ESCURO, retangulo_mensagem, border_radius=15)  
         pg.draw.rect(tela, BRANCO, retangulo_mensagem.inflate(-10, -10), border_radius=15)  
        
-        texto_mensagem = fonte.render(mensagem, True, CINZA_ESCURO)
-        rect_mensagem = texto_mensagem.get_rect(center=(LARGURA // 2, ALTURA//2))
+        texto_mensagem = fonte2.render(mensagem, True, MARROM)
+        rect_mensagem = texto_mensagem.get_rect(center=(LARGURA // 2, 105))
         tela.blit(texto_mensagem, rect_mensagem)
 
 
