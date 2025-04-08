@@ -198,16 +198,19 @@ def jogo():
             if item.tipo == "agua":
                 pg.mixer.music.load("sons/bebeu_agua_beats.mp3")
                 pg.mixer.music.set_volume(1)
+                pg.mixer.music.play(0)
                 tempo_restante += 1000 # Aumenta tempo em 1 segundo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
                 pg.mixer.music.load("sons/bebeu_agua_beats.mp3")
                 pg.mixer.music.set_volume(1)
+                pg.mixer.music.play(0)
                 jogador.velocidade += 0.5 # Aumenta velocidade
                 qtd_beats += 1  # Aumenta a contagem de beats
             else:
-                pg.mixer.music.load("sons/bebeu_pitu.mp3")
+                som_pitu = pg.mixer.music.load("sons/bebeu_pitu.mp3")
                 pg.mixer.music.set_volume(1)
+                pg.mixer.music.play(0)
                 qtd_vida -= 1 
                 qtd_pitu += 1 # Aumenta a contagem de pitú
                 if qtd_vida == 0:
