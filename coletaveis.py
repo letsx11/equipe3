@@ -10,14 +10,17 @@ class Coletavel(pg.sprite.Sprite) :
         if tipo == "agua" :
             # Imagem água
             self.image = pg.image.load("imagens/agua.png")  
+            self.image = pg.transform.scale(self.image, (40, 45))  
         elif tipo == "beats" :
             # Imagem beats
             self.image = pg.image.load("imagens/beats.png")  
+            self.image = pg.transform.scale(self.image, (20, 35))  
         else :
             # Imagem pitu
             self.image = pg.image.load("imagens/pitu.png") 
+            self.image = pg.transform.scale(self.image, (25, 35))  
 
-        self.image = pg.transform.scale(self.image, (40, 50))  
+        
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.velocidade = velocidade
