@@ -27,15 +27,15 @@ fonte2 = pg.font.Font('fontes/fonte3 (1).ttf', 33)
 fonte3 = pg.font.Font('fontes/fonte3 (2).ttf', 20)
 
 # Fundo da tela inicial 
-fundo_tela_inicial = pg.image.load("imagens/capa_inicial.png")
+fundo_tela_inicial = pg.image.load("imagens/capas/capa_inicial.png")
 fundo_tela_inicial = pg.transform.scale(fundo_tela_inicial, (LARGURA, ALTURA))
 
 # Fundo de tela do jogo 
-fundo_tela_jogo = pg.image.load("imagens/ladeira_olinda.png")
+fundo_tela_jogo = pg.image.load("imagens/capas/ladeira_olinda.png")
 fundo_tela_jogo = pg.transform.scale(fundo_tela_jogo, (LARGURA, ALTURA))
 
 # Fundo tela final 
-fundo_tela_final = pg.image.load("imagens/capa_final.png")
+fundo_tela_final = pg.image.load("imagens/capas/capa_final.png")
 fundo_tela_final = pg.transform.scale(fundo_tela_final, (LARGURA, ALTURA))
 
 # Botões
@@ -58,9 +58,9 @@ pg.mixer.music.load("sons/marcelorossiter-voltei-recife-8e035859.mp3")
 pg.mixer.music.set_volume(1)
 
 # Função vidas
-imagem_vida = pg.image.load('imagens/coracao_vida.png').convert_alpha()
+imagem_vida = pg.image.load('imagens/coracoes/coracao_vida.png').convert_alpha()
 imagem_vida = pg.transform.scale(imagem_vida, (40, 40))  
-imagem_sem_vida = pg.image.load('imagens/coracao_sem_vida.png').convert_alpha()
+imagem_sem_vida = pg.image.load('imagens/coracoes/coracao_sem_vida.png').convert_alpha()
 imagem_sem_vida = pg.transform.scale(imagem_sem_vida, (40, 40))  
 
 def desenhar_vidas(qtd_vida):
