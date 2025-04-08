@@ -196,12 +196,18 @@ def jogo():
         coletados = pg.sprite.spritecollide(jogador, coletaveis, True)
         for item in coletados:
             if item.tipo == "agua":
+                pg.mixer.music.load("sons/bebeu_agua_beats.mp3")
+                pg.mixer.music.set_volume(1)
                 tempo_restante += 1000 # Aumenta tempo em 1 segundo
                 qtd_agua += 1  # Aumenta a contagem de água
             elif item.tipo == "beats":
+                pg.mixer.music.load("sons/bebeu_agua_beats.mp3")
+                pg.mixer.music.set_volume(1)
                 jogador.velocidade += 0.5 # Aumenta velocidade
                 qtd_beats += 1  # Aumenta a contagem de beats
             else:
+                pg.mixer.music.load("sons/bebeu_pitu.mp3")
+                pg.mixer.music.set_volume(1)
                 qtd_vida -= 1 
                 qtd_pitu += 1 # Aumenta a contagem de pitú
                 if qtd_vida == 0:
@@ -273,6 +279,8 @@ def tela_final(vencedor, total_coletaveis):
         if vencedor:
             mensagem = f"Você ganhou {total_coletaveis} pontos!"      
         else:
+            pg.mixer.music.load("sons/perdeu.mp3")
+            pg.mixer.music.set_volume(1)
             mensagem = "Suas vidas acabaram :/"
 
         retangulo_mensagem = pg.Rect(0, 0, largura_mensagem, altura_mensagem)
