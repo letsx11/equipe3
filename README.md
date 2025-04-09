@@ -40,10 +40,10 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 - sons/: Diretório que guarda todos os arquivos de áudio do jogo, incluindo a música de abertura e os efeitos sonoros de coleta.
   
 ## Ferramentas: 
-- Discord: ferramenta de comunicação em grupo, utilizada para troca de ideias, alinhamento de tarefas e discussões sobre o projeto.
+- Discord: ferramenta de comunicação em grupo, utilizada para troca de ideias, alinhamento de tarefas, discussões sobre o projeto e reuniões com monitores.
 - GitHub: plataforma utilizada para armazenar, versionar e compartilhar o projeto, além de possibilitar o trabalho colaborativo com controle de alterações.
 - Inteligência Artificial: recurso utilizado como apoio durante o desenvolvimento, auxiliando na resolução de dúvidas, desenvolvimento de imagens e melhorias no projeto.
-- Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis, botões e outras imagens da interface.
+- Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis e outras imagens da interface.
 - Pygame: biblioteca utilizada para o desenvolvimento do jogo, fornecendo os recursos necessários para criar gráficos, sons e interações com o usuário.
 - Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmica (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
 - Sys: módulo usado para lidar com funcionalidades do sistema, como a finalização do programa ou a manipulação de argumentos da linha de comando, a qual permite fechar o jogo corretamente (Ex.: sys.exit()), por exemplo.
