@@ -20,5 +20,7 @@ Ao chegar à segunda parte, haverá bebidas caindo de cima da tela, sendo elas: 
 
 Além disso, cada bebida tem seu "poder especial". A latinha de Beats, por exemplo, aumenta a velocidade do jogador em (aumento da vel), já a água aumenta o seu tempo de jogo em (aumento de tempo).
 
-Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e a outra é se o tempo limite expirar. Qualquer uma das duas o levará à terceira parte, que é a tela final. Caso o jogo termine devido à perda total das vidas, aparecerá apenas uma mensagem informando que o jogador perdeu. Caso contrário, será exibido o total de bebidas que ele conseguiu pegar. E, para as duas opções, no fim da tela terá: "Sair" ou "Jogar Novamente".  
+Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e a outra é se o tempo limite expirar. Qualquer uma das duas o levará à terceira parte, que é a tela final. Caso o jogo termine devido à perda total das vidas, aparecerá apenas uma mensagem informando que o jogador perdeu. Caso contrário, será exibido o total de bebidas que ele conseguiu pegar. E, para as duas opções, no fim da tela terá: "Sair" ou "Jogar Novamente". 
 
+## Capturas de Tela
+### Tela Inicial
