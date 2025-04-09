@@ -40,15 +40,15 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 - sons/: Diretório que guarda todos os arquivos de áudio do jogo, incluindo a música de abertura e os efeitos sonoros de coleta.
   
 ## Ferramentas 
-- Pygame:
-- Random:
-- Sys:
-- Time:
-- VS code:
-- Git Hub:
-- Discord:
-- Inteligencia Artificial:
-- Photoshop:
+- Discord: ferramenta de comunicação em grupo, utilizada para troca de ideias, alinhamento de tarefas e discussões sobre o projeto.
+- GitHub: plataforma utilizada para armazenar, versionar e compartilhar o projeto, além de possibilitar o trabalho colaborativo com controle de alterações.
+- Inteligência Artificial: recurso utilizado como apoio durante o desenvolvimento, auxiliando na resolução de dúvidas, desenvolvimento de imagens e melhorias no projeto.
+- Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis, botões e outras imagens da interface.
+- Pygame: biblioteca utilizada para o desenvolvimento do jogo, fornecendo os recursos necessários para criar gráficos, sons e interações com o usuário.
+- Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmica (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
+- Sys: módulo usado para lidar com funcionalidades do sistema, como a finalização do programa ou a manipulação de argumentos da linha de comando, a qual permite fechar o jogo corretamente (Ex.: sys.exit()), por exemplo.
+- Time: utilizado para controlar o tempo dentro do jogo, como pausas, contagem regressiva e intervalos entre ações.
+- VS Code: editor de código usado durante o desenvolvimento do projeto, oferecendo suporte a diversas linguagens, extensões e um ambiente prático para programação.
 
 ## Divisão de tarefas
 | **Integrate** | **Tarefas** |
@@ -62,9 +62,10 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 
 ## Conceitos Utilizados:
 - Classes e objetos: foram utilizados para definir estruturas e atribuir a elas características e funcionalidades específicas dentro do código, como a classe "player" e a classe "coletaveis".
-- Condicionais: aplicadas ao longo de todo o projeto, permiti com que o jogo reaja de forma dinâmica às interações do usuário.
+- Condicionais: aplicadas ao longo de todo o projeto, permitir com que o jogo reaja de forma dinâmica às interações do usuário.
 - Funções: responsáveis por organizar o código, separando suas funcionalidades de forma clara e eficiente.
 - Laços de repetição: presentes em grande parte do código, são essenciais para garantir o fluxo contínuo e o funcionamento geral do jogo.
+- Listas: utilizadas para armazernar os frames responsáveis pela animação do personagem.
 - Tuplas: utilizadas para armazenar dados fixos, como a definição de cores no formato RGB e a posição dos botões na interface.
 
 ## Desafios
