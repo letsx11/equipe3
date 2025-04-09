@@ -35,9 +35,9 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 - main.py: Trata-se do módulo central do jogo, o qual nele junta todas a estruturas assim fazendo com que o jogo funcione. 
 - player.py: Esse arquivo complementa o personagem principal do jogo, trazendo suas características e movimentações presentes no jogo.
 - coletaveis.py: Comporta a classe dos 3 objetos coletáveis (água, beats e pitu), essenciais para a dinamica e funcionamento do jogo. 
-- fontes/: 
-- imagens/:
-- sons/:
+- fontes/: Pasta que armazena a fonte dos textos presentes no jogo.
+- imagens/: Pasta com toda a parte gráfica do jogo (capas, coletáveis, vidas, personagem)
+- sons/: Pasta com todo os áudios presentes (música inicial, sons 
 
 
 
