@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 import random
+import time 
 from player import Player 
 from coletaveis import Coletavel
 
@@ -10,7 +11,7 @@ pg.mixer.init()
 # Configurações da tela
 LARGURA, ALTURA = 700, 600
 tela = pg.display.set_mode((LARGURA, ALTURA))
-pg.display.set_caption("Carnagame")
+pg.display.set_caption("NaLadeira")
 
 # Cores
 BRANCO = (255, 255, 255)
@@ -214,6 +215,7 @@ def jogo():
                 qtd_vida -= 1 
                 qtd_pitu += 1 # Aumenta a contagem de pitú
                 if qtd_vida == 0:
+                    time.sleep(0.25)
                     rodando = False
         
         total_coletaveis = qtd_agua + qtd_beats
