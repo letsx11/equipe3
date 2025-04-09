@@ -27,10 +27,17 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ![Screenshot 2025-04-09 135918](https://github.com/user-attachments/assets/0542799a-f2dd-4c15-bd20-ad99e8c746fc)
 ### Tela de Jogo
 ![Screenshot 2025-04-09 140000](https://github.com/user-attachments/assets/de116bd5-132d-496a-8ca0-1fe85509ee98)
-![Screenshot 2025-04-09 140130](https://github.com/user-attachments/assets/4b84da2d-2230-43ef-973b-641b2a40f16d)
 ### Telas finais
 ![Screenshot 2025-04-09 140151](https://github.com/user-attachments/assets/10d6f05a-44f9-46e3-9f12-4c64ec7be804)
 ![Screenshot 2025-04-09 140234](https://github.com/user-attachments/assets/1c43c99e-923c-4907-b3b8-5f58f15bb4c8)
+
+## Arquitetura do Projeto
+- main.py: Trata-se do módulo central do jogo, o qual nele junta todas a estruturas assim fazendo com que o jogo funcione. 
+- player.py: Esse arquivo complementa o personagem principal do jogo, trazendo suas características e movimentações presentes no jogo.
+- coletaveis.py: Comporta a classe dos 3 objetos coletáveis (água, beats e pitu), essenciais para a dinamica e funcionamento do jogo. 
+- fontes/: 
+- imagens/:
+- sons/:
 
 
 
