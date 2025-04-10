@@ -50,7 +50,7 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 - Inteligência Artificial: recurso utilizado no desenvolvimento de imagens.
 - Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis e outras imagens da interface.
 - Pygame: biblioteca utilizada para o desenvolvimento do jogo, fornecendo os recursos necessários para criar gráficos, sons e interações com o usuário.
-- Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmica (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
+- Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmico (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
 - Sys: módulo usado para lidar com funcionalidades do sistema, como a finalização do programa ou a manipulação de argumentos da linha de comando, a qual permite fechar o jogo corretamente (Ex.: sys.exit()), por exemplo.
 - Time: utilizado para controlar o tempo dentro do jogo, como pausas, contagem regressiva e intervalos entre ações.
 - VS Code: editor de código usado durante o desenvolvimento do projeto, oferecendo suporte a diversas linguagens, extensões e um ambiente prático para programação.
