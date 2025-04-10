@@ -1,26 +1,23 @@
 # NaLadeira - Jogo 2D em Python com Pygame: 
 
 ## Membros da equipe:
-- Andrya Gabryelle Santos de Araujo
-- Clara Dias Guimarães
-- Gabriela Alves Fernandes Vieira
-- Gabriela Marques de Rangel Moreira
-- Iago Lopes da Silva
-- Leticia Santos Xavier
-
-
-
-
-
+- Andrya Gabryelle Santos de Araujo;
+- Clara Dias Guimarães;
+- Gabriela Alves Fernandes Vieira;
+- Gabriela Marques de Rangel Moreira;
+- Iago Lopes da Silva;
+- Leticia Santos Xavier.
 
 ## Descrição do Jogo:
 O jogo é dividido em três partes: a primeira delas é o menu inicial, onde o jogador pode clicar em "Iniciar Jogo", o que o levará à segunda parte, na qual o jogo propriamente dito acontece, ou clicar em "Sair" para fechar o jogo. Lembrando que, a qualquer momento, caso o jogador queira abandonar o jogo, a tecla "ESC" pode ser pressionada.
 
-Ao chegar à segunda parte, haverá bebidas caindo de cima da tela, sendo elas: água, beats e pitu. O objetivo é pegar a maior quantidade de bebidas possível dentro de 30 segundos, exceto a pitu, pois, a cada uma coletada, uma das três vidas é retirada.
+Ao chegar à segunda parte, haverá bebidas caindo de cima da tela, sendo elas: água, Beats e Pitu. O objetivo é pegar a maior quantidade de bebidas possível dentro de 30 segundos, exceto a Pitu, pois, a cada uma coletada, uma das três vidas é retirada.
+
+O jogador pode se mover para a esquerda e para a direita utilizando as teclas "A" (esquerda) e "D" (direita).
 
 Além disso, cada bebida tem seu "poder especial". A latinha de Beats, por exemplo, aumenta a velocidade do jogador em 0.5, já a água aumenta o seu tempo de jogo em 1 segundo.
 
-Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e a outra é se o tempo limite expirar. Qualquer uma das duas o levará à terceira parte, que é a tela final. Caso o jogo termine devido à perda total das vidas, aparecerá apenas uma mensagem informando que o jogador perdeu. Caso contrário, será exibido o total de bebidas que ele conseguiu pegar. E, para as duas opções, no fim da tela terá: "Sair" ou "Jogar Novamente". 
+Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e a outra é se o tempo limite expirar. Qualquer uma das duas o levará à terceira parte, que é a tela final. Caso o jogo termine devido à perda total das vidas, aparecerá apenas uma mensagem informando que o jogador perdeu. Caso contrário, será exibido o total de bebidas que ele conseguiu pegar. E, para as duas opções, no fim da tela terá: "Sair" ou "Jogar Novamente".
 
 ## Capturas de Tela:
 ### Tela Inicial
@@ -38,13 +35,6 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ![beatsnovo](https://github.com/user-attachments/assets/32355138-a998-480c-a81a-e06347250b69)
 ### Pitu - ao coletar perde-se 1 vida.
 ![pitu25](https://github.com/user-attachments/assets/dd5956ab-f7dc-43e9-bb2b-8a65809cc925)
-
-
-
-
-
-
-
 
 ## Arquitetura do Projeto:
 - main.py: Arquivo principal do jogo, responsável por integrar todos os módulos e coordenar o funcionamento geral da aplicação.
@@ -92,9 +82,3 @@ Um dos principais desafios enfrentados foi manter a organização do código em 
 Além disso, o uso de ferramentas novas e de conceitos já conhecidos — mas aplicados de formas diferentes — também representou uma dificuldade no início. Assim como no caso do GitHub, a prática constante e os erros cometidos ao longo do processo se tornaram parte do aprendizado, permitindo que avançássemos no desenvolvimento com mais segurança e eficiência.
 ### Quais as lições aprendidas durante o projeto?
 As principais lições aprendidas durante o projeto foram a importância da comunicação entre os membros do grupo e da organização geral do trabalho. Por se tratar de um projeto em equipe, onde todos estavam lidando com ferramentas e conceitos novos para o grupo, percebemos que, se tivéssemos priorizado a comunicação e a organização desde o início, o desenvolvimento teria sido mais leve e fluido. Essa experiência reforçou o valor da colaboração e do planejamento em projetos coletivos.
-
-
-
-
-
-
