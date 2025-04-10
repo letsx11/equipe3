@@ -47,7 +47,7 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ## Ferramentas: 
 - Discord: ferramenta de comunicação em grupo, utilizada para troca de ideias, alinhamento de tarefas, discussões sobre o projeto e reuniões com monitores.
 - GitHub: plataforma utilizada para armazenar, versionar e compartilhar o projeto, além de possibilitar o trabalho colaborativo com controle de alterações.
-- Inteligência Artificial: recurso utilizado no desenvolvimento de imagens e melhorias no projeto.
+- Inteligência Artificial: recurso utilizado no desenvolvimento de imagens.
 - Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis e outras imagens da interface.
 - Pygame: biblioteca utilizada para o desenvolvimento do jogo, fornecendo os recursos necessários para criar gráficos, sons e interações com o usuário.
 - Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmica (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
