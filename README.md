@@ -70,7 +70,7 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 - Condicionais: aplicadas ao longo de todo o projeto, permitir com que o jogo reaja de forma dinâmica às interações do usuário.
 - Funções: responsáveis por organizar o código, separando suas funcionalidades de forma clara e eficiente.
 - Laços de repetição: presentes em grande parte do código, são essenciais para garantir o fluxo contínuo e o funcionamento geral do jogo.
-- Listas: utilizadas para armazernar os frames responsáveis pela animação do personagem.
+- Listas: utilizadas para armazenar os frames responsáveis pela animação do personagem.
 - Tuplas: utilizadas para armazenar dados fixos, como a definição de cores no formato RGB e a posição dos botões na interface.
 
 ## Desafios:
