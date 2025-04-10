@@ -29,9 +29,9 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ![Screenshot 2025-04-09 140234](https://github.com/user-attachments/assets/1c43c99e-923c-4907-b3b8-5f58f15bb4c8)
 
 ## Itens Coletáveis:
-### Água - ao coletar aumenta tempo e ganha 1 ponto.
+### Água - ao coletar aumenta o tempo e ganha 1 ponto.
 ![aguanovo](https://github.com/user-attachments/assets/b6c46e13-6119-4bf4-9c5f-8a642c9c7ec4)
-### Beats - ao coletar aumenta velocidade e ganha 1 ponto.
+### Beats - ao coletar aumenta a velocidade e ganha 1 ponto.
 ![beatsnovo](https://github.com/user-attachments/assets/32355138-a998-480c-a81a-e06347250b69)
 ### Pitu - ao coletar perde-se 1 vida.
 ![pitu25](https://github.com/user-attachments/assets/dd5956ab-f7dc-43e9-bb2b-8a65809cc925)
