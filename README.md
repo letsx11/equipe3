@@ -82,3 +82,6 @@ Um dos principais desafios enfrentados foi manter a organização do código em 
 Além disso, o uso de ferramentas novas e de conceitos já conhecidos — mas aplicados de formas diferentes — também representou uma dificuldade no início. Assim como no caso do GitHub, a prática constante e os erros cometidos ao longo do processo se tornaram parte do aprendizado, permitindo que avançássemos no desenvolvimento com mais segurança e eficiência.
 ### Quais as lições aprendidas durante o projeto?
 As principais lições aprendidas durante o projeto foram a importância da comunicação entre os membros do grupo e da organização geral do trabalho. Por se tratar de um projeto em equipe, onde todos estavam lidando com ferramentas e conceitos novos para o grupo, percebemos que, se tivéssemos priorizado a comunicação e a organização desde o início, o desenvolvimento teria sido mais leve e fluido. Essa experiência reforçou o valor da colaboração e do planejamento em projetos coletivos.
+
+## Relatório:
+https://docs.google.com/document/d/1L481qzWKk1AsWV5G_NAq8FTnYKA2JupxFeR1G6vuxc0/edit?usp=sharing
