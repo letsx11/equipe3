@@ -31,6 +31,21 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ![Screenshot 2025-04-09 140151](https://github.com/user-attachments/assets/10d6f05a-44f9-46e3-9f12-4c64ec7be804)
 ![Screenshot 2025-04-09 140234](https://github.com/user-attachments/assets/1c43c99e-923c-4907-b3b8-5f58f15bb4c8)
 
+## Itens Coletáveis:
+### Água - ao coletar aumenta tempo e ganha 1 ponto.
+![aguanovo](https://github.com/user-attachments/assets/b6c46e13-6119-4bf4-9c5f-8a642c9c7ec4)
+### Beats - ao coletar aumenta velocidade e ganha 1 ponto.
+![beatsnovo](https://github.com/user-attachments/assets/32355138-a998-480c-a81a-e06347250b69)
+### Pitu - ao coletar perde-se 1 vida.
+![pitu25](https://github.com/user-attachments/assets/dd5956ab-f7dc-43e9-bb2b-8a65809cc925)
+
+
+
+
+
+
+
+
 ## Arquitetura do Projeto:
 - main.py: Arquivo principal do jogo, responsável por integrar todos os módulos e coordenar o funcionamento geral da aplicação.
 - player.py: Define o personagem principal, incluindo suas características, animações e movimentações dentro do jogo.
@@ -42,7 +57,7 @@ Há duas formas de o jogo terminar: uma é se o jogador perder as três vidas, e
 ## Ferramentas: 
 - Discord: ferramenta de comunicação em grupo, utilizada para troca de ideias, alinhamento de tarefas, discussões sobre o projeto e reuniões com monitores.
 - GitHub: plataforma utilizada para armazenar, versionar e compartilhar o projeto, além de possibilitar o trabalho colaborativo com controle de alterações.
-- Inteligência Artificial: recurso utilizado como apoio durante o desenvolvimento, auxiliando na resolução de dúvidas, desenvolvimento de imagens e melhorias no projeto.
+- Inteligência Artificial: recurso utilizado no desenvolvimento de imagens e melhorias no projeto.
 - Photoshop: utilizado para criar e editar elementos visuais do jogo, como os itens coletáveis e outras imagens da interface.
 - Pygame: biblioteca utilizada para o desenvolvimento do jogo, fornecendo os recursos necessários para criar gráficos, sons e interações com o usuário.
 - Random: módulo utilizado para gerar aleatoriedade no jogo, a qual deixa a experiência do usuário com jogo mais dinâmica (Ex.: random.randint() e random.choice(), usadas para posicionar e escolher os coletáveis que caem).
